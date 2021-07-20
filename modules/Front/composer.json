@@ -1,0 +1,15 @@
+{
+    "name": "project/front",
+    "autoload": {
+        "psr-4": {
+            "Front\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Front\\Providers\\FrontServiceProvider"
+            ]
+        }
+    }
+}

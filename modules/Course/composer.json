@@ -1,0 +1,15 @@
+{
+    "name": "project/course",
+    "autoload": {
+        "psr-4": {
+            "Course\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Course\\Providers\\CourseServiceProvider"
+            ]
+        }
+    }
+}

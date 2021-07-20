@@ -1,0 +1,12 @@
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/iranSans/eot/IRANSansWeb(FaNum)_Medium.eot');
+    src: url('../fonts/iranSans/eot/IRANSansWeb(FaNum)_Medium.eot?#iefix') format('embedded-opentype'), /* IE6-8 */ url('../fonts/iranSans/woff2/IRANSansWeb(FaNum)_Medium.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/ url('../fonts/iranSans/woff/IRANSansWeb(FaNum)_Medium.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../fonts/iranSans/ttf/IRANSansWeb(FaNum)_Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: digikala;
+    src: url('../fonts/digikala/digikala.eot');
+    src: url('../fonts/digikala/digikala.eot?#iefix') format('embedded-opentype'), url('../fonts/digikala/digikala.woff2') format('woff2'), url('../fonts/digikala/digikala.woff') format('woff'), url('../fonts/digikala/digikala.ttf') format('truetype')
+}

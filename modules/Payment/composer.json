@@ -1,0 +1,15 @@
+{
+    "name": "project/payment",
+    "autoload": {
+        "psr-4": {
+            "Payment\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Payment\\Providers\\PaymentServiceProvider"
+            ]
+        }
+    }
+}

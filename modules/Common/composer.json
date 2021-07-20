@@ -1,0 +1,18 @@
+{
+    "name": "project/common",
+    "autoload": {
+        "psr-4": {
+            "Common\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Common\\Providers\\CommonServiceProvider"
+            ]
+        }
+    }
+}
