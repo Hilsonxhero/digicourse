@@ -13,25 +13,28 @@ use User\Models\User;
 class PaymentService
 {
 
-    public static function generate($amount, $paymentable, User $buyer)
+    public static function generate($amount, $paymentable, User $buyer,$seller_id = null)
     {
         if ($amount <= 0 || is_null($paymentable->id) || is_null($buyer->id)) return false;
 
         $gateway_name = "zarinpal";
         $invoice = (new Invoice)->amount($amount);
 //        $invoice->via($gateway_name);
-        return Payment::purchase($invoice, function ($driver, $transactionId) use ($amount, $paymentable, $gateway_name, $buyer) {
+        return Payment::purchase($invoice, function ($driver, $transactionId) use ($amount, $paymentable, $gateway_name, $buyer,$seller_id) {
 
             if (!is_null($paymentable->percent)) {
                 $seller_percent = $paymentable->percent;
                 $seller_share = ($amount / 100) * $seller_percent;
                 $site_share = $amount - $seller_share;
             } else {
-                $seller_percent = $seller_share = $site_share = 0;
+                $seller_percent = $seller_share = 0;
+                $site_share = $amount;
 
             }
+
             resolve(PaymentRepo::class)->store([
                 'buyer_id' => $buyer->id,
+                'seller_id' => $seller_id,
                 'paymentable_id' => $paymentable->id,
                 'paymentable_type' => get_class($paymentable),
                 'amount' => $amount,

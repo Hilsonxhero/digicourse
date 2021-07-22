@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->enum('status', \User\Models\User::$statuses);
             $table->boolean('is_superuser')->default(0);
             $table->string('ip')->nullable();
+            $table->bigInteger('balance')->default(0);
             $table->bigInteger('thumb_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();

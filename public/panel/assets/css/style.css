@@ -839,7 +839,9 @@ textarea {
 .header__logo {
     height: 44px;
     width: 200px;
-    background: url("../img/weblogo.png") no-repeat;
+    background: url("../img/web-logo-ui.png") no-repeat;
+    background-size: contain;
+    background-position-y: 100%;
     margin-top: -10px;
     margin-right: 20px;
 }
@@ -2011,7 +2013,8 @@ button.item-delete {
 .multi-text > div:not(:first-child,:last-child) {
     margin: 0 .2rem;
 }
-.icon-ui{
+
+.icon-ui {
     background: transparent !important;
     outline: none;
     border: none;

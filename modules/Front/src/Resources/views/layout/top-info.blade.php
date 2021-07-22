@@ -1,7 +1,7 @@
 
     <div class="top-info">
         <div class="slideshow">
-            <div class="slide"><img src="{{asset('home/assets/img/slideshow/p-1.jpg')}}g" alt=""></div>
+            <div class="slide"><img src="{{asset('home/assets/img/slideshow/p-1.jpg')}}" alt=""></div>
             <div class="slide"><img src="{{asset('home/assets/img/slideshow/p-2.jpg')}}" alt=""></div>
             <div class="slide"><img src="{{asset('home/assets/img/slideshow/p-3.jpg')}}" alt=""></div>
             <div class="slide"><img src="{{asset('home/assets/img/slideshow/p-1.jpg')}}" alt=""></div>

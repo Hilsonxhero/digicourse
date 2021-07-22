@@ -17,6 +17,7 @@
         "kavenegar/php": "^1.2",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "morilog/jalali": "3.*",
         "project/common": "dev-master",
         "project/course": "dev-master",
         "project/front": "dev-master",

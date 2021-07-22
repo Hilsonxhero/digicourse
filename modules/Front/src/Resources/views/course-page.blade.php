@@ -7,8 +7,8 @@
 
             <div class="container">
                 <article class="article">
-                    <div class="ads mb-10">
-                        <a href="" rel="nofollow noopener"><img src="{{$course->banner->thumb()}}}" alt=""></a>
+                    <div class="ads mb-10 d-none">
+                        <a href="" rel="nofollow noopener"><img src="" alt=""></a>
                     </div>
                     <div class="h-t">
                         <h1 class="title">
@@ -74,7 +74,7 @@
                         </span>
                                     </p>
                                 </div>
-                                <button class="btn buy">خرید دوره</button>
+                                <a href="{{route('login')}}" class="btn btn--login width-100">ورود</a>
                             @endauth
 
                             <div class="average-rating-sidebar">
@@ -254,7 +254,7 @@
                             <li class="is-comment">
                                 <div class="comment-header">
                                     <div class="comment-header-avatar">
-                                        <img src="img/profile.jpg">
+                                        <img src="{{asset('home/assets/img/profile.jpg')}}">
                                     </div>
                                     <div class="comment-header-detail">
                                         <div class="comment-header-name">کاربر : گوگل گوگل گوگل گوگل</div>
@@ -273,7 +273,7 @@
                             <li class="is-answer">
                                 <div class="comment-header">
                                     <div class="comment-header-avatar">
-                                        <img src="img/laravel-pic.png">
+                                        <img src="{{asset('home/assets/img/laravel-pic.png')}}">
                                     </div>
                                     <div class="comment-header-detail">
                                         <div class="comment-header-name">مدیر سایت : محمد نیکو</div>
@@ -296,7 +296,7 @@
                             <li class="is-comment">
                                 <div class="comment-header">
                                     <div class="comment-header-avatar">
-                                        <img src="img/profile.jpg">
+                                        <img src="{{asset('home/assets/img/profile.jpg')}}">
                                     </div>
                                     <div class="comment-header-detail">
                                         <div class="comment-header-name">کاربر : گوگل</div>
@@ -321,7 +321,7 @@
                             <li class="is-comment">
                                 <div class="comment-header">
                                     <div class="comment-header-avatar">
-                                        <img src="img/profile.jpg">
+                                        <img src="{{asset('home/assets/img/profile.jpg')}}">
                                     </div>
                                     <div class="comment-header-detail">
                                         <div class="comment-header-name">کاربر : گوگل</div>
@@ -340,7 +340,7 @@
                             <li class="is-answer">
                                 <div class="comment-header">
                                     <div class="comment-header-avatar">
-                                        <img src="img/laravel-pic.png">
+                                        <img src="{{asset('home/assets/img/laravel-pic.png')}}">
                                     </div>
                                     <div class="comment-header-detail">
                                         <div class="comment-header-name">مدیر سایت : محمد نیکو</div>
@@ -384,7 +384,7 @@
                         </div>
                         <button type="button" class="btn i-t "
                                 onclick="checkDiscountCode()">اعمال
-                            <img src="/img/loading.gif" alt="" id="loading"
+                            <img src="" alt="" id="loading"
                                  class="loading d-none">
                         </button>
                         <table class="table text-center table-bordered table-striped">

@@ -135,7 +135,7 @@ class CourseController extends Controller
             return false;
         }
 
-        if (auth()->user()->hasAccessToCourse($course)) {
+        if (auth()->user()->can('download',$course)) {
             newFeedback('عملیات نا موفق', 'شما به دوره دسترسی دارید!', 'error');
             return false;
         }
@@ -161,7 +161,7 @@ class CourseController extends Controller
             return redirect()->to($course->path());
         }
 
-        return PaymentService::generate($amount, $course, auth()->user());
+        return PaymentService::generate($amount, $course, auth()->user(),$course->teacher_id);
 
     }
 

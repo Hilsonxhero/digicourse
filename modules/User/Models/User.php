@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Media\Models\Media;
+use Payment\Models\Payment;
 use RolePermissions\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use User\Notifications\ResetPasswordRequestNotification;
@@ -145,6 +146,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function purchases()
     {
         return $this->belongsToMany(Course::class, 'course_user', 'course_id', 'user_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'buyer_id');
     }
 
 }

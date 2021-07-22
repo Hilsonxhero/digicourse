@@ -8,7 +8,7 @@ class PaymentServiceProvider extends ServiceProvider
 {
     public function register()
     {
-
+        $this->app->register(EventServiceProvider::class);
 
     }
 
@@ -17,7 +17,7 @@ class PaymentServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/payment_routes.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 //        $this->loadFactoriesFrom(__DIR__ . '/../database/factories');
-//        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'Course');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'Payment');
 //        $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/lang');
 
 //        Gate::policy(Course::class, CoursePolisy::class);

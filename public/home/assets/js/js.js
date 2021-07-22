@@ -104,12 +104,12 @@ function progressbar(slideId) {
     function frame() {
         if (width >= 100) {
             clearInterval(pt);
-            items[slideId].style.width = '0%';
+            // items[slideId].style.width = '0%';
             slideIndex++;
             slideIndex = slideShow(slideIndex);
         } else {
             width++;
-            items[slideId].style.width = width + '%';
+            // items[slideId].style.width = width + '%';
         }
     }
 
@@ -199,14 +199,15 @@ $('.study-mode').click(function () {
     $('.content-left').toggleClass('on');
 })
 
-function submitForm(button, form) {
-    let btn = document.getElementById(button);
-    let formUi = document.getElementById(form);
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        formUi.submit();
-    })
-}
-
-submitForm('resend-code-btn', 'resend-code');
-
+// function submitForm(button, form) {
+//     let btn = document.getElementById(button);
+//     let formUi = document.getElementById(form);
+//     if (btn,formUi)
+//     btn.addEventListener('click', (e) => {
+//         e.preventDefault();
+//         formUi.submit();
+//     })
+// }
+//
+// submitForm('resend-code-btn', 'resend-code');
+//

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{asset('panel/assets/css/responsive_991.css')}}" media="(max-width:991px)">
     <link rel="stylesheet" href="{{asset('panel/assets/css/responsive_768.css')}}" media="(max-width:768px)">
     <link rel="stylesheet" href="{{asset('panel/assets/css/font.css')}}">
+    <link rel="stylesheet" href="{{asset('panel/assets/css/c3.min.css')}}"/>
 
 </head>
 <body>
@@ -30,28 +31,15 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- jQuery Modal -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-{{$script ?? ''}}
+
 <script>
     @include('Common::feedback')
 </script>
 <script src="{{asset('panel/assets/js/tagsInput.js')}}"></script>
+<script src="{{asset('panel/assets/js/c3.bundle.js')}}"></script>
+<script src="{{asset('panel/assets/js/c3.js')}}"></script>
 <script src="{{asset('panel/assets/js/js.js?v=2')}}"></script>
-<script>
-    // const Toast = Swal.mixin({
-    //     toast: true,
-    //     position: 'top-end',
-    //     showConfirmButton: false,
-    //     timer: 3000,
-    //     timerProgressBar: true,
-    //     didOpen: (toast) => {
-    //         toast.addEventListener('mouseenter', Swal.stopTimer)
-    //         toast.addEventListener('mouseleave', Swal.resumeTimer)
-    //     }
-    // })
-    //
-    // Toast.fire({
-    //     icon: 'success',
-    //     title: 'Signed in successfully'
-    // })
-</script>
+
+{{$script ?? ''}}
+
 </html>
