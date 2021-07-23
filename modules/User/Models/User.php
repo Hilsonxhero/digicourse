@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Media\Models\Media;
 use Payment\Models\Payment;
+use Payment\Models\Settlement;
 use RolePermissions\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use User\Notifications\ResetPasswordRequestNotification;
@@ -38,35 +39,21 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
     use HasFactory, Notifiable, HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
         'status',
         'phone',
         'thumb_id',
+        'is_superuser',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -94,15 +81,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Media::class, 'thumb_id');
     }
 
-    public function image()
-    {
-        if ($this->thumb) {
-            return '/storage/' . $this->thumb->files[300];
-        } else {
-            return asset('panel/assets/img/profile.jpg');
-        }
-    }
-
     public function courses()
     {
         return $this->hasMany(Course::class, 'teacher_id');
@@ -118,9 +96,33 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Lesson::class);
     }
 
+    public function purchases()
+    {
+        return $this->belongsToMany(Course::class, 'course_user', 'user_id', 'course_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'buyer_id');
+    }
+
+    public function settlements()
+    {
+        return $this->hasMany(Settlement::class);
+    }
+
     public function isVerify()
     {
         return $this->hasVerifiedEmail() ? '<span class="text-success">فعال</span>' : '<span class="text-error">غیرفعال</span>';
+    }
+
+    public function image()
+    {
+        if ($this->thumb) {
+            return '/storage/' . $this->thumb->files[300];
+        } else {
+            return asset('panel/assets/img/profile.jpg');
+        }
     }
 
     public function studentsCount()
@@ -143,14 +145,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
-    public function purchases()
-    {
-        return $this->belongsToMany(Course::class, 'course_user', 'course_id', 'user_id');
-    }
 
-    public function payments()
-    {
-        return $this->hasMany(Payment::class, 'buyer_id');
-    }
 
 }

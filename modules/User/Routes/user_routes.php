@@ -20,6 +20,7 @@ Route::middleware(['web', 'auth', 'verified', 'auth.admin'])->prefix('dashboard'
     Route::post('users/{user}/verify/email', [UserController::class, 'verifyUser'])->name('users.verify.email');
     Route::get('user/profile', [UserController::class, 'profile'])->name('dashboard.user.profile');
     Route::post('user/profile', [UserController::class, 'updateProfile'])->name('dashboard.user.profile');
+    Route::get('user/{user:name}/profile', [UserController::class, 'info'])->name('dashboard.user.info');
 });
 
 

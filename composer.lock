@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3a8f4e953ead5f25948cd731f60cb00",
+    "content-hash": "705fea691328c8fe29d8d840404ff2ae",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2133,6 +2133,31 @@
             "autoload": {
                 "psr-4": {
                     "Course\\": "src"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "project/discount",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/Discount",
+                "reference": "78406dd150539091204eb7dd1654aeada9459025"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "\\Discount\\Providers\\DiscountServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Discount\\": "src"
                 }
             },
             "transport-options": {
@@ -9514,6 +9539,7 @@
     "stability-flags": {
         "project/common": 20,
         "project/course": 20,
+        "project/discount": 20,
         "project/front": 20,
         "project/payment": 20
     },

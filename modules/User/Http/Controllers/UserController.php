@@ -9,6 +9,7 @@ use RolePermissions\Repostories\RolesRepo;
 use User\Http\Requests\UpdateProfileRequest;
 use User\Http\Requests\UserCreateRequest;
 use User\Http\Requests\UserUpdateRequest;
+use User\Models\User;
 use User\Repositories\UserRepo;
 
 class UserController extends Controller
@@ -59,7 +60,7 @@ class UserController extends Controller
         $user = $this->UserRepo->findById($id);
         if ($request->hasFile('thumb')) {
             $request->request->add(['thumb_id' => MediaFileService::publicUpload($request->file('thumb'))->id]);
-            $user->thumb ?  $user->thumb->delete() : "";
+            $user->thumb ? $user->thumb->delete() : "";
         } else {
             $request->request->add(['thumb_id' => $user->thumb_id]);
         }
@@ -81,12 +82,20 @@ class UserController extends Controller
         return view('User::panel.profile');
     }
 
+    public function info(User $user)
+    {
+
+        $user = $this->UserRepo->findFullInfo($user->id);
+        return view('User::panel.user-info', compact('user'));
+    }
+
+
     public function updateProfile(UpdateProfileRequest $request)
     {
         $user = auth()->user();
         if ($request->hasFile('thumb')) {
             $request->request->add(['thumb_id' => MediaFileService::publicUpload($request->file('thumb'))->id]);
-            $user->thumb ?  $user->thumb->delete() : "";
+            $user->thumb ? $user->thumb->delete() : "";
 
         } else {
             $request->request->add(['thumb_id' => $user->thumb_id]);

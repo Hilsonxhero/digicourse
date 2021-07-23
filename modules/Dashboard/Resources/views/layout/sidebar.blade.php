@@ -19,16 +19,26 @@
         <li class="item-li i-role-permissions @if(request()->is('dashboard/role-permissions') || request()->is('dashboard/role-permissions/*') ) is-active @endif">
             <a href="{{route('role-permissions.index')}}"> نقش های کاربری</a></li>
 
-        <li class="item-li i-my__purchases @if(request()->is('dashboard/purchases') || request()->is('dashboard/purchases/*') ) is-active @endif""><a href="{{route('purchases.index')}}">خرید های من</a></li>
+        <li class="item-li i-my__purchases @if(request()->is('dashboard/purchases') || request()->is('dashboard/purchases/*') ) is-active @endif"
+        "><a href="{{route('purchases.index')}}">خرید های من</a></li>
         <li class="item-li i-transactions @if(request()->is('dashboard/payments') || request()->is('dashboard/payments/*') ) is-active @endif">
             <a href="{{route('payments.index')}}">تراکنش ها</a></li>
 
         <li class="item-li i-categories @if(request()->is('dashboard/categories') || request()->is('dashboard/categories/*') ) is-active @endif">
             <a href="{{route('categories.index')}}">دسته بندی ها</a></li>
 
+
+        <li class="item-li i-checkouts @if(request()->is('dashboard/settlements') || request()->is('dashboard/settlements/*') ) is-active @endif ">
+            <a href="{{route('settlements.index')}}">تسویه حساب ها</a></li>
+
+        <li class="item-li i-checkout__request @if(request()->is('dashboard/settlements/create')) is-active @endif "><a
+                href="{{route('settlements.create')}}">درخواست تسویه </a></li>
+
+
+        <li class="item-li i-discounts @if(request()->is('dashboard/discounts') || request()->is('dashboard/discounts/*') ) is-active @endif"><a href="{{route('discounts.index')}}">تخفیف ها</a></li>
+
         <li class="item-li i-user__inforamtion @if(request()->is('dashboard/user/profile') || request()->is('dashboard/user/profile/*') ) is-active @endif">
             <a href="{{route('dashboard.user.profile')}}">اطلاعات کاربری</a></li>
-
 
 
         <li class="item-li i-slideshow"><a href="slideshow.html">اسلایدشو</a></li>
@@ -37,9 +47,8 @@
         <li class="item-li i-ads"><a href="ads.html">تبلیغات</a></li>
         <li class="item-li i-comments"><a href="comments.html"> نظرات</a></li>
         <li class="item-li i-tickets"><a href="tickets.html"> تیکت ها</a></li>
-        <li class="item-li i-discounts"><a href="discounts.html">تخفیف ها</a></li>
-        <li class="item-li i-checkouts"><a href="checkouts.html">تسویه حساب ها</a></li>
-        <li class="item-li i-checkout__request "><a href="checkout-request.html">درخواست تسویه </a></li>
+
+
 
         <li class="item-li i-my__peyments"><a href="mypeyments.html">پرداخت های من</a></li>
         <li class="item-li i-notification__management"><a href="notification-management.html">مدیریت اطلاع رسانی</a>

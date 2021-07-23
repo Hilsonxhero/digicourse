@@ -78,4 +78,11 @@ class UserRepo
         return User::permission(Permission::PERMISSION_TEACH)->get();
     }
 
+    public function findFullInfo($user)
+    {
+        return User::query()->where("id", $user)
+            ->with("purchases", "payments", "settlements", "courses")
+            ->firstOrFail();
+    }
+
 }

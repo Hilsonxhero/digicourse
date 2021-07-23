@@ -1,0 +1,15 @@
+{
+    "name": "project/discount",
+    "autoload": {
+        "psr-4": {
+            "Discount\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Discount\\Providers\\DiscountServiceProvider"
+            ]
+        }
+    }
+}

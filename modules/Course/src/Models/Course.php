@@ -4,9 +4,11 @@ namespace Course\Models;
 
 use Category\Models\Category;
 use Course\Repositories\CourseRepo;
+use Discount\Models\Discount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Media\Models\Media;
+use Payment\Models\Payment;
 use User\Models\User;
 
 class Course extends Model
@@ -120,5 +122,17 @@ class Course extends Model
         return resolve(CourseRepo::class)->hasStudent($this, $student_id);
     }
 
+    public function payments()
+    {
+        return $this->morphMany(Payment::class, "paymentable");
+    }
+    public function discounts(){
+        return $this->morphToMany(Discount::class,"discountable");
+    }
+
+    public function payment()
+    {
+        return $this->payments()->latest()->first();
+    }
 
 }

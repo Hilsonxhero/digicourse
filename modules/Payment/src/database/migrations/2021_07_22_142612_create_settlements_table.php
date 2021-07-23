@@ -15,7 +15,20 @@ class CreateSettlementsTable extends Migration
     {
         Schema::create('settlements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("user_id")->nullable();
+            $table->string("transaction_id")->nullable();
+            $table->json("from")->nullable();
+            $table->json("to")->nullable();
+            $table->timestamp("settled_at")->nullable();
+            $table->enum("status", \Payment\Models\Settlement::$statuses)
+                ->default(\Payment\Models\Settlement::STATUS_PENDING);
+            $table->float("amount")->unsigned();
             $table->timestamps();
+
+            $table->foreign("user_id")
+                ->references("id")
+                ->on("users")
+                ->onDelete("set null");
         });
     }
 

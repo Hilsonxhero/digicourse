@@ -20,6 +20,7 @@
         "morilog/jalali": "3.*",
         "project/common": "dev-master",
         "project/course": "dev-master",
+        "project/discount": "dev-master",
         "project/front": "dev-master",
         "project/payment": "dev-master",
         "shetabit/payment": "^4.0",
@@ -41,6 +42,10 @@
         {
             "type" : "path",
             "url" : "./modules/Course/"
+        },
+        {
+            "type" : "path",
+            "url" : "./modules/Discount/"
         }
     ],
     "require-dev": {

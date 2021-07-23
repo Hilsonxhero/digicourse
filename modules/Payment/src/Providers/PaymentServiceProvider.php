@@ -18,7 +18,7 @@ class PaymentServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 //        $this->loadFactoriesFrom(__DIR__ . '/../database/factories');
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'Payment');
-//        $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/lang');
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/lang');
 
 //        Gate::policy(Course::class, CoursePolisy::class);
     }
