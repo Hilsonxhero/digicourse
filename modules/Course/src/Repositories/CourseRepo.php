@@ -15,6 +15,13 @@ class CourseRepo
         return Course::find($id);
     }
 
+    public function getAll($status = null)
+    {
+        $query = Course::query();
+        if ($status) $query->where("confirmation_status", $status)->latest()->get();
+        return $query->latest()->get();
+    }
+
     public function store($values)
     {
         Course::query()->create([

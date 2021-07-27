@@ -23,6 +23,7 @@
         "project/discount": "dev-master",
         "project/front": "dev-master",
         "project/payment": "dev-master",
+        "project/ticket": "dev-master",
         "shetabit/payment": "^4.0",
         "spatie/laravel-permission": "^4.2"
     },
@@ -46,6 +47,10 @@
         {
             "type" : "path",
             "url" : "./modules/Discount/"
+        },
+        {
+            "type" : "path",
+            "url" : "./modules/Ticket/"
         }
     ],
     "require-dev": {

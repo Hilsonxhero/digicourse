@@ -18,9 +18,15 @@
                     <a class="btn confirm-btn" href="{{route('lessons.create',$course->id)}}">آپلود جلسه جدید</a>
                 </div>
                 <div class="d-flex item-center flex-wrap margin-bottom-15 operations__btns">
-                    <button class="btn all-confirm-btn" onclick="acceptAllLessons('{{route('lessons.acceptAll',$course->id) }}')">تایید همه جلسات</button>
-                    <button class="btn confirm-btn" onclick="acceptMultiple('{{route('lessons.acceptMultiple',$course->id) }}')">تایید جلسات</button>
-                    <button class="btn reject-btn" onclick="rejectMultiple('{{route('lessons.rejectMultiple',$course->id) }}')">رد جلسات</button>
+                    <button class="btn all-confirm-btn"
+                            onclick="acceptAllLessons('{{route('lessons.acceptAll',$course->id) }}')">تایید همه جلسات
+                    </button>
+                    <button class="btn confirm-btn"
+                            onclick="acceptMultiple('{{route('lessons.acceptMultiple',$course->id) }}')">تایید جلسات
+                    </button>
+                    <button class="btn reject-btn"
+                            onclick="rejectMultiple('{{route('lessons.rejectMultiple',$course->id) }}')">رد جلسات
+                    </button>
                     <button class="btn delete-btn"
                             onclick="deleteMultiple('{{route('lessons.destroyMultiple',$course->id) }}')">حذف
                         جلسات
@@ -57,7 +63,7 @@
                                 </td>
                                 <td><a href="">{{$loop->index+1}}</a></td>
                                 <td><a href="">{{$lesson->title}}</a></td>
-                                <td>{{$lesson->season->title}}</td>
+                                <td>{{$lesson->season ?  $lesson->season->title : '-'}}</td>
                                 <td>{{$lesson->time}}دقیقه</td>
                                 <td>{!! $lesson->confiramation_status() !!}</td>
                                 <td>
@@ -67,7 +73,7 @@
                                     <span>
                                         <form action="{{route('lessons.destroy',$lesson->id)}}" method="post">
                                     @csrf
-                                    @method('delete')
+                                            @method('delete')
                                     <button type="submit" class="icon-ui item-delete mlg-15" title="حذف"></button>
                                         </form>
                                     </span>
@@ -84,7 +90,8 @@
                                         </form>
                                     </span>
                                     <a href="" class="item-lock mlg-15" title="قفل "></a>
-                                    <a href="{{route('lessons.edit',[$course->id,$lesson->id])}}" class="item-edit " title="ویرایش"></a>
+                                    <a href="{{route('lessons.edit',[$course->id,$lesson->id])}}" class="item-edit "
+                                       title="ویرایش"></a>
                                 </td>
                             </tr>
                         @endforeach

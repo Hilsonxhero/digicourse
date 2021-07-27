@@ -2,6 +2,7 @@
 
 namespace Payment\Models;
 
+use Discount\Models\Discount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use User\Models\User;
@@ -31,6 +32,7 @@ class Payment extends Model
     {
         return $this->belongsTo(User::class, "buyer_id");
     }
+
     public function seller()
     {
         return $this->belongsTo(User::class, "seller_id");
@@ -39,6 +41,11 @@ class Payment extends Model
     public function getCreateAtInJalali()
     {
         return verta($this->created_at)->format('%d %B %Y');
+    }
+
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class, 'discount_payment')->withTimestamps();
     }
 
     public function status()

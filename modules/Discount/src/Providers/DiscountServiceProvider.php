@@ -11,7 +11,7 @@ class DiscountServiceProvider extends ServiceProvider
 
     public function register()
     {
-
+        $this->app->register(EventServiceProvider::class);
 
     }
 
@@ -21,7 +21,7 @@ class DiscountServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 //        $this->loadFactoriesFrom(__DIR__ . '/../database/factories');
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'Discount');
-//        $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/lang');
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/lang');
 
 //        Gate::policy(Course::class, CoursePolisy::class);
     }

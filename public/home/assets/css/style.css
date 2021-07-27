@@ -3681,49 +3681,59 @@ textarea {
     max-width: 100% !important;
     transition: all 200ms ease;
 }
-.error-alert-ui{
+
+.error-alert-ui {
     margin-bottom: .5rem;
-    color: rgba(255,30,33,0.69);
+    color: rgba(255, 30, 33, 0.69);
 }
 
 table {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 1rem;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     color: #6c757d;
 }
+
 .table-bordered {
     border: 1px solid #f0f0f5;
 }
+
 .table-striped tbody tr:nth-of-type(2n+1) {
     background-color: #f9f9f9;
 }
+
 .table th {
     text-align: initial;
 }
+
 .table-bordered th, .table-bordered td {
     border: 1px solid #f0f0f5;
 }
+
 .table-bordered th, .table-bordered td {
     border: 1px solid #f0f0f5;
 }
+
 .table th, .table td {
     padding: .75rem;
     vertical-align: top;
     border-top: 1px solid #f0f0f5;
 }
+
 .text-red {
     color: #ff6e6e !important;
 }
+
 .text-blue {
     color: #46b2f0 !important;
 }
 
-#Modal-buy p{
+#Modal-buy p {
     color: #000;
     font-size: 18px;
 }
+
 .text-success {
     color: #00b894 !important;
 }
@@ -3740,3 +3750,83 @@ table {
     color: #e73368 !important;
 }
 
+
+.page-loader-wrapper {
+    z-index: 99999999;
+    position: fixed;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translateY(-50%) translateX(-50%);*/
+    inset: 0px;
+    /*width: 400px;*/
+    /*height: 250px;*/
+    overflow: hidden;
+    background: rgb(34, 37, 42);
+}
+
+
+.page-loader-wrapper .loader {
+    margin: 0px auto;
+    width: 70px;
+    height: 50px;
+    text-align: center;
+    font-size: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.page-loader-wrapper .loader > div {
+    height: 100%;
+    width: 8px;
+    display: inline-block;
+    margin-left: 2px;
+    animation: 0.9s ease-in-out 0s infinite normal none running delay;
+}
+
+.page-loader-wrapper .loader .bar1 {
+    background-color: rgb(252, 60, 95);
+}
+
+.page-loader-wrapper .loader .bar2 {
+    background-color: rgb(153, 60, 252);
+    animation-delay: -0.8s;
+}
+
+.page-loader-wrapper .loader .bar3 {
+    background-color: rgb(60, 169, 252);
+    animation-delay: -0.7s;
+}
+
+.page-loader-wrapper .loader .bar4 {
+    background-color: rgb(60, 252, 95);
+    animation-delay: -0.6s;
+}
+
+.page-loader-wrapper .loader .bar5 {
+    background-color: rgb(252, 223, 60);
+    animation-delay: -0.5s;
+}
+
+@-webkit-keyframes delay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.05);
+    }
+    20% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes delay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.05);
+    }
+    20% {
+        transform: scaleY(1);
+    }
+}

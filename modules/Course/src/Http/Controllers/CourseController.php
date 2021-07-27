@@ -154,14 +154,15 @@ class CourseController extends Controller
         if (!$this->authUserCanPurchaseCourse($course)) {
             return back();
         }
-        $amount = $course->getFinalPrice();
+        [$amount,$discounts] = $course->getFinalPrice($request->code,true);
+
         if ($amount <= 0) {
             $this->CourseRepo->addStudentToCourse($course, auth()->user()->id);
             newFeedback();
             return redirect()->to($course->path());
         }
 
-        return PaymentService::generate($amount, $course, auth()->user(),$course->teacher_id);
+        return PaymentService::generate((integer) $amount, $course, auth()->user(),$course->teacher_id,$discounts);
 
     }
 

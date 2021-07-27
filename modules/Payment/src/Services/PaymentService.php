@@ -13,14 +13,14 @@ use User\Models\User;
 class PaymentService
 {
 
-    public static function generate($amount, $paymentable, User $buyer,$seller_id = null)
+    public static function generate($amount, $paymentable, User $buyer, $seller_id = null, $discounts = [])
     {
         if ($amount <= 0 || is_null($paymentable->id) || is_null($buyer->id)) return false;
 
         $gateway_name = "zarinpal";
         $invoice = (new Invoice)->amount($amount);
 //        $invoice->via($gateway_name);
-        return Payment::purchase($invoice, function ($driver, $transactionId) use ($amount, $paymentable, $gateway_name, $buyer,$seller_id) {
+        return Payment::purchase($invoice, function ($driver, $transactionId) use ($amount, $paymentable, $gateway_name, $buyer, $seller_id,$discounts) {
 
             if (!is_null($paymentable->percent)) {
                 $seller_percent = $paymentable->percent;
@@ -44,7 +44,7 @@ class PaymentService
                 'seller_percent' => $seller_percent,
                 'seller_share' => $seller_share,
                 'site_share' => $site_share,
-            ]);
+            ],$discounts);
 //            dd($order->payment->amount);
         })->pay()->render();
     }

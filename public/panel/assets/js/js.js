@@ -167,10 +167,13 @@ $('.create-ads .ads-field-banner').on('click', function (e) {
     $('.file-upload').show()
 });
 $('.discounts #discounts-field-2').on('click', function (e) {
-    $('.discounts .dropdown-select').addClass('is-active')
+    $('#select-course-js').removeClass('d-none')
 });
+// $('.discounts #discounts-field-1').on('click', function (e) {
+//     $('.discounts .dropdown-select').addClass('d-none')
+// });
 $('.discounts #discounts-field-1').on('click', function (e) {
-    $('.discounts .dropdown-select').removeClass('is-active')
+    $('#select-course-js').addClass('d-none')
 });
 
 function acceptAllLessons(route) {
@@ -264,6 +267,7 @@ function doMultipleAction(route,message, method) {
         }
     }
 }
+
 
 
 

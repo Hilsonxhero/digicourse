@@ -58,9 +58,9 @@ class PaymentRepo
         return $this->query->latest()->paginate();
     }
 
-    public function store($data)
+    public function store($data, $discounts = [])
     {
-        return Payment::query()->create([
+        $payment = Payment::query()->create([
             'buyer_id' => $data['buyer_id'],
             'seller_id' => $data['seller_id'],
             'paymentable_id' => $data['paymentable_id'],
@@ -73,6 +73,11 @@ class PaymentRepo
             'seller_share' => $data['seller_share'],
             'site_share' => $data['site_share'],
         ]);
+        foreach ($discounts as $discount) $discountIds[] = $discount->id;
+        if (isset($discountIds))
+            $payment->discounts()->sync($discountIds);
+
+        return $payment;
     }
 
     public function getLastNDaysPayments($days = null, $status)

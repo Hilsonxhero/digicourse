@@ -12,9 +12,11 @@
     <link rel="stylesheet" href="{{asset('panel/assets/css/responsive_768.css')}}" media="(max-width:768px)">
     <link rel="stylesheet" href="{{asset('panel/assets/css/font.css')}}">
     <link rel="stylesheet" href="{{asset('panel/assets/css/c3.min.css')}}"/>
+    {{$style ?? ''}}
 
 </head>
 <body>
+
 @include('Dashboard::layout.sidebar')
 <div class="content">
     @include('Dashboard::layout.header')

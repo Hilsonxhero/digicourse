@@ -42,13 +42,19 @@
                                 @elseif(auth()->user()->can('download',$course))
                                     <p class="mycourse">شما این دوره رو خریداری کرده اید</p>
                                 @else
-                                    <div class="discountBadge">
-                                        <p>45%</p>
-                                        تخفیف
-                                    </div>
+                                    @if($course->getDiscount())
+                                        <div class="discountBadge">
+                                            <p>{{$course->getDiscountPercent()}}%</p>
+                                            تخفیف
+                                        </div>
+                                    @endif
                                     <div class="sell_course">
                                         <strong>قیمت :</strong>
-                                        <del class="discount-Price">{{number_format($course->price)}}</del>
+                                        @if($course->getDiscount())
+                                            <del
+                                                class="discount-Price">{{number_format($course->getFinalPrice())}}</del>
+                                        @endif
+
                                         <p class="price">
                         <span class="woocommerce-Price-amount amount">{{number_format($course->price)}}
                             <span class="woocommerce-Price-currencySymbol">تومان</span>
@@ -61,13 +67,18 @@
                                 @endif
 
                             @else
-                                <div class="discountBadge">
-                                    <p>45%</p>
-                                    تخفیف
-                                </div>
+                                @if($course->getDiscount())
+                                    <div class="discountBadge">
+                                        <p>{{$course->getDiscount()}}%</p>
+                                        تخفیف
+                                    </div>
+                                @endif
                                 <div class="sell_course">
                                     <strong>قیمت :</strong>
-                                    <del class="discount-Price">{{number_format($course->price)}}</del>
+                                    @if($course->getDiscount())
+                                        <del
+                                            class="discount-Price">{{number_format($course->getFinalPrice())}}</del>
+                                    @endif
                                     <p class="price">
                         <span class="woocommerce-Price-amount amount">{{number_format($course->price)}}
                             <span class="woocommerce-Price-currencySymbol">تومان</span>
@@ -411,7 +422,7 @@
                                 <th> قابل پرداخت</th>
                                 <td class="text-blue"><span
                                         id="payableAmount"
-                                        data-value="{{number_format($course->getFinalPrice())}}">{{number_format($course->getFinalPrice())}}</span>
+                                        data-value="{{$course->getFinalPrice()}}">{{number_format($course->getFinalPrice())}}</span>
                                     تومان
                                 </td>
                             </tr>
@@ -439,5 +450,30 @@
 
     <x-slot name="script">
         <script src="{{asset('home/assets/js/modal.js')}}"></script>
+        <script>
+            function checkDiscountCode() {
+                $("#page-loader-js").removeClass("d-none");
+                const code = $("#code").val();
+                const url = "{{route("discounts.check",["code",$course->id]) }}";
+                $.get(url.replace("code", code))
+                    .done(function (data) {
+                        $("#discountPercent").text( parseInt($("#discountPercent").attr("data-value")) +  data.discountPercent)
+                        $("#discountAmount").text(parseInt($("#discountAmount").attr("data-value")) + data.discountAmount)
+                        $("#payableAmount").text(parseInt($("#payableAmount").attr("data-value")) - data.discountAmount)
+
+                        $("#response").text("کد تخفیف با موفقیت اعمال شد").removeClass("text-error").addClass("text-success")
+                    })
+                    .fail(function (data) {
+                        $("#response").text("کد تخفیف وارد شده معتبر نمی باشد").removeClass("text-success").addClass("text-error");
+                    })
+                    .always(function () {
+                        $("#page-loader-js").addClass("d-none");
+                    })
+                    .beforeSend(function () {
+                        $("#page-loader-js").addClass("d-none");
+                        $("#response").text("");
+                    });
+            }
+        </script>
     </x-slot>
 </x-app-layout>

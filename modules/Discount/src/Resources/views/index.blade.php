@@ -17,6 +17,7 @@
                             <thead role="rowgroup">
                             <tr role="row" class="title-row">
                                 <th>شناسه</th>
+                                <th>کد تخفیف</th>
                                 <th>درصد</th>
                                 <th>محدودیت زمانی</th>
                                 <th>توضیحات</th>
@@ -25,50 +26,61 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr role="row" class="">
-                                <td><a href="">1</a></td>
-                                <td><a href="">50%</a></td>
-                                <td>2 ساعت دیگر</td>
-                                <td>مناسبت عید نوروز</td>
-                                <td>0 نفر</td>
-                                <td>
-                                    <a href="" class="item-delete mlg-15"></a>
-                                    <a href="edit-discount.html" class="item-edit " title="ویرایش"></a>
-                                </td>
-                            </tr>
+                            @foreach($discounts as $discount)
 
+                                <tr role="row" class="">
+                                    <td><a href="">{{$loop->index+1}}</a></td>
+                                    <td><a href="">{{$discount->code ? $discount->code : '-'}}</a></td>
+                                    <td><a href="">{{$discount->percent}}%</a> @lang($discount->type)</td>
+                                    <td>{{$discount->expire_at ?  createFromCarbon($discount->expire_at)  : 'بدون تاریخ انقضا'}}</td>
+                                    <td>{{$discount->description}}</td>
+                                    <td>{{$discount->uses}} نفر</td>
+                                    <td>
+                                                      <span>
+                                        <form action="{{route('discounts.destroy',$discount->id)}}" method="post">
+                                        @csrf
+                                            @method('delete')
+                                        <button type="submit" class="item-delete mlg-15" title="حذف"></button>
+                                        </form>
+                                    </span>
+                                        <a href="{{route('discounts.edit',$discount->id)}}" class="item-edit " title="ویرایش"></a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="col-4 bg-white">
-                <p class="box__title">ایجاد تخفیف جدید</p>
-                <form action="" method="post" class="padding-30">
-                    <input type="text" placeholder="درسد تخفیف" class="text">
-                    <input type="text" placeholder="محدودیت افراد" class="text">
-                    <input type="text" placeholder="محدودیت زمانی به ساعت" class="text">
-                    <p class="box__title">این تخفیف برای</p>
-                    <div class="notificationGroup">
-                        <input id="discounts-field-1" class="discounts-field-pn" name="discounts-field" type="radio"/>
-                        <label for="discounts-field-1">همه دوره ها</label>
-                    </div>
-                    <div class="notificationGroup">
-                        <input id="discounts-field-2" class="discounts-field-pn" name="discounts-field" type="radio"/>
-                        <label for="discounts-field-2">دوره خاص</label>
-                    </div>
-                    <select name="" class="custom-select-box-js">
-                        <option value="0">انتخاب دوره</option>
-                        <option value="1">دوره لاراول</option>
-                        <option value="2">دوره ری اکت</option>
-                        <option value="3">دوره جی اس</option>
-                    </select>
-                    <input type="text" placeholder="لینک اطلاعات بیشتر" class="text">
-                    <input type="text" placeholder="توضیحات" class="text margin-bottom-15">
-
-                    <button class="btn btn-webamooz_net">اضافه کردن</button>
-                </form>
-            </div>
+            @include("Discount::create")
         </div>
     </div>
+    <x-slot name="style">
+        <link rel="stylesheet"
+              href="{{asset('panel/assets/vendor/persian-date/css/persian-datepicker-0.4.5.min.css')}}"/>
+
+        <link rel="stylesheet"
+              href="{{asset('panel/assets/vendor/select2/css/select2.min.css')}}"/>
+    </x-slot>
+    <x-slot name="script">
+        <script src="{{asset('panel/assets/vendor/select2/js/select2.min.js')}}"></script>
+
+        <script src="{{asset('panel/assets/vendor/persian-date/js/persian-date-0.1.8.min.js')}}"></script>
+        <script src="{{asset('panel/assets/vendor/persian-date/js/persian-datepicker-0.4.5.min.js')}}"></script>
+        <script>
+            $('.custom-select2-js').select2();
+
+            $(document).ready(function () {
+                $('#tarikh').persianDatepicker({
+                    altField: '#tarikhAlt',
+                    altFormat: 'X',
+                    format: 'YYYY/MM/DD HH:mm ',
+                    observer: true,
+                    timePicker: {
+                        enabled: true
+                    },
+                });
+            });
+        </script>
+    </x-slot>
 </x-panel-dashboard>

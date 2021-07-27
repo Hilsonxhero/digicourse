@@ -35,6 +35,8 @@
                 href="{{route('settlements.create')}}">درخواست تسویه </a></li>
 
 
+        <li class="item-li i-tickets @if(request()->is('dashboard/tickets') || request()->is('dashboard/tickets/*') ) is-active @endif"><a href="{{route('tickets.index')}}"> تیکت ها</a></li>
+
         <li class="item-li i-discounts @if(request()->is('dashboard/discounts') || request()->is('dashboard/discounts/*') ) is-active @endif"><a href="{{route('discounts.index')}}">تخفیف ها</a></li>
 
         <li class="item-li i-user__inforamtion @if(request()->is('dashboard/user/profile') || request()->is('dashboard/user/profile/*') ) is-active @endif">
@@ -46,7 +48,7 @@
         <li class="item-li i-articles"><a href="articles.html">مقالات</a></li>
         <li class="item-li i-ads"><a href="ads.html">تبلیغات</a></li>
         <li class="item-li i-comments"><a href="comments.html"> نظرات</a></li>
-        <li class="item-li i-tickets"><a href="tickets.html"> تیکت ها</a></li>
+
 
 
 

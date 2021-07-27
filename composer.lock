@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "705fea691328c8fe29d8d840404ff2ae",
+    "content-hash": "0815fcf72108b45a4ec534a6e2a0e4db",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2208,6 +2208,31 @@
             "autoload": {
                 "psr-4": {
                     "Payment\\": "src"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "project/ticket",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/Ticket",
+                "reference": "ff4944ca6c85bf771ba887e040ee51f59b983dc6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "\\Ticket\\Providers\\TicketServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ticket\\": "src"
                 }
             },
             "transport-options": {
@@ -9541,7 +9566,8 @@
         "project/course": 20,
         "project/discount": 20,
         "project/front": 20,
-        "project/payment": 20
+        "project/payment": 20,
+        "project/ticket": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

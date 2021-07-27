@@ -5,10 +5,13 @@ namespace Course\Models;
 use Category\Models\Category;
 use Course\Repositories\CourseRepo;
 use Discount\Models\Discount;
+use Discount\Repositories\DiscountRepo;
+use Discount\Services\DiscountService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Media\Models\Media;
 use Payment\Models\Payment;
+use Ticket\Models\Ticket;
 use User\Models\User;
 
 class Course extends Model
@@ -79,24 +82,81 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function payments()
+    {
+        return $this->morphMany(Payment::class, "paymentable");
+    }
+
+    public function discounts()
+    {
+        return $this->morphToMany(Discount::class, "discountable");
+    }
+
+    public function tickets()
+    {
+        return $this->morphMany(Ticket::class, "ticketable");
+    }
+
     public function getDuration()
     {
         return (new CourseRepo())->geDuration($this->id);
     }
 
+    public function getDiscount()
+    {
+        $discountRepo = new DiscountRepo();
+        // specific Discount
+        $discount = $discountRepo->getCourseBiggerDiscount($this->id);
+        // global Discount
+        $globalDiscount = $discountRepo->getGlobalBiggerDiscount();
+        if ($discount == null && $globalDiscount == null) return null;
+        if ($discount == null && $globalDiscount != null) return $globalDiscount;
+        if ($discount != null && $globalDiscount == null) return $discount;
+        if ($globalDiscount->percent > $discount->percent) return $globalDiscount;
+        return $discount;
+
+    }
+
     public function getDiscountPercent()
     {
+        $discount = $this->getDiscount();
+        if ($discount) return $discount->percent;
         return 0;
     }
 
-    public function getDiscountAmount()
+    public function getDiscountAmount($percent = null)
     {
-        return 0;
+        if ($percent == null) {
+            $discount = $this->getDiscount();
+            $percent = $discount ? $discount->percent : 0;
+        }
+        return DiscountService::calculateDiscountAmount($this->price, $percent);
     }
 
-    public function getFinalPrice()
+    public function getFinalPrice($code = null, $withDiscounts = false)
     {
-        return $this->price - $this->getDiscountAmount();
+        $discount = $this->getDiscount();
+        $amount = $this->price;
+
+        $discounts = [];
+        if ($discount) {
+            $discounts[] = $discount;
+            $amount = $this->price - $this->getDiscountAmount($discount->percent);
+        }
+
+
+        if ($code) {
+            $repo = new DiscountRepo();
+            $discountFromCode = $repo->getValidDiscountByCode($code, $this->id);
+            if ($discountFromCode) {
+                $discounts[] = $discountFromCode;
+                $amount = $amount - DiscountService::calculateDiscountAmount($amount, $discountFromCode->percent);
+            }
+        }
+        if ($withDiscounts)
+            return [$amount, $discounts];
+
+        return $amount;
     }
 
     public function formattedDuration()
@@ -120,14 +180,6 @@ class Course extends Model
     public function hasStudent($student_id)
     {
         return resolve(CourseRepo::class)->hasStudent($this, $student_id);
-    }
-
-    public function payments()
-    {
-        return $this->morphMany(Payment::class, "paymentable");
-    }
-    public function discounts(){
-        return $this->morphToMany(Discount::class,"discountable");
     }
 
     public function payment()

@@ -1793,15 +1793,19 @@ select {
     color: #636e72;
 }
 
-.transition-ticket-body pre, .transition-comment-body pre {
-    font-family: IRANSans;
+.transition-ticket-body pre, .transition-comment-body {
     overflow: hidden;
-    white-space: pre-line;
     color: #424242;
-    line-height: 28px;
     text-align: justify;
     font-size: 14px;
     padding: 30px;
+}
+ .transition-comment-body .download-box-ui {
+    border: 2px dashed #e5e5e5;
+    border-radius: 8px;
+    text-align: center;
+    padding: 1rem 2rem;
+     margin-top: 1rem;
 }
 
 .transition-ticket-body .loading-file {
@@ -2019,4 +2023,16 @@ button.item-delete {
     outline: none;
     border: none;
     cursor: pointer;
+}
+
+.select2 {
+    width: 100% !important;
+}
+
+.selection {
+    display: block !important;
+}
+
+.select2-search__field {
+    height: 16px !important;
 }

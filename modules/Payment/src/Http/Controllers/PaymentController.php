@@ -74,6 +74,7 @@ class PaymentController extends Controller
         try {
 
             $amount = $payment->amount;
+//            dd(gettype($amount));
 
 
             $receipt = Payment::amount($amount)->transactionId($transaction_id)->verify();

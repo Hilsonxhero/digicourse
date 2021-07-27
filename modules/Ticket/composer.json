@@ -1,0 +1,15 @@
+{
+    "name": "project/ticket",
+    "autoload": {
+        "psr-4": {
+            "Ticket\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Ticket\\Providers\\TicketServiceProvider"
+            ]
+        }
+    }
+}

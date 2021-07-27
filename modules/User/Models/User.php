@@ -14,6 +14,8 @@ use Payment\Models\Payment;
 use Payment\Models\Settlement;
 use RolePermissions\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
+use Ticket\Models\Reply;
+use Ticket\Models\Ticket;
 use User\Notifications\ResetPasswordRequestNotification;
 use User\Notifications\VerifyEmailNotification;
 
@@ -111,6 +113,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Settlement::class);
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function ticketReplies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     public function isVerify()
     {
         return $this->hasVerifiedEmail() ? '<span class="text-success">فعال</span>' : '<span class="text-error">غیرفعال</span>';
@@ -144,7 +156,6 @@ class User extends Authenticatable implements MustVerifyEmail
         ) return true;
         return false;
     }
-
 
 
 }
